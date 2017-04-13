@@ -11,14 +11,14 @@ function subscribeToMessagesOnCurrentChat(subscribeCallback) {
    mutations.forEach(function(mutation) { 
      for (var i = 0; i < mutation.addedNodes.length; i++)
        var msgNode = mutation.addedNodes[i];
-       var messageNode = msgNode.getElementsByClassName("message")[0];
-       if (messageNode) {
-         var textNode = messageNode.getElementsByClassName("selectable-text")[0];
+       if (msgNode) {
+         var textNode = msgNode.querySelector(".msg .message .emojitext.selectable-text")
          if (textNode) {
            subscribeCallback(textNode.textContent);
          }
        }
    })
   });
+
   observer.observe($(".message-list"), { childList: true });
 }
